@@ -118,3 +118,32 @@ body {
 .btn.demo:hover {
   background: #4338ca;
 }
+
+.btn-container {
+  max-width: 1200px;
+  margin: 40px auto 0;
+  display: flex;
+  justify-content: center;
+}
+
+.btn-big {
+  width: 100%;
+  padding: 22px;
+  font-size: 22px;
+  font-weight: bold;
+  border-radius: 14px;
+  border: none;
+  background: #2563eb;
+  color: white;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+}
+
+.btn-big:hover {
+  background: #1d4ed8;
+  transform: translateY(-3px);
+}
+
+.btn-big:active {
+  transform: scale(0.98);
+}
