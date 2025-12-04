@@ -7,22 +7,28 @@ const projectGrid = document.getElementById('projectGrid');
 
 openModalBtn.addEventListener('click', () => {
   projectModal.style.display = 'flex';
-  projectModal.setAttribute('aria-hidden','false');
+  projectModal.setAttribute('aria-hidden', 'false');
 });
 
-function closeModal(){
+function closeModal() {
   projectModal.style.display = 'none';
-  projectModal.setAttribute('aria-hidden','true');
+  projectModal.setAttribute('aria-hidden', 'true');
 }
 
 closeModalBtn.addEventListener('click', closeModal);
 modalCancel.addEventListener('click', closeModal);
-window.addEventListener('click', (e) => { if (e.target === projectModal) closeModal(); });
-window.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
 
-function fileToURL(file){
+window.addEventListener('click', (e) => {
+  if (e.target === projectModal) closeModal();
+});
+
+window.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeModal();
+});
+
+function fileToURL(file) {
   if (!file) return '';
-  return URL.createObjectURL(file); 
+  return URL.createObjectURL(file);
 }
 
 projectForm.addEventListener('submit', (e) => {
@@ -46,6 +52,7 @@ projectForm.addEventListener('submit', (e) => {
 
   const card = document.createElement('div');
   card.className = 'card';
+
   card.innerHTML = `
     <img class="thumb" src="${thumbURL}" alt="thumb">
     <div class="content">
@@ -59,11 +66,26 @@ projectForm.addEventListener('submit', (e) => {
       </div>
       <p class="desc">${escapeHtml(desc)}</p>
       <div class="tags">
-        ${(tagsRaw ? tagsRaw.split(',').map(t => `<span class="tag">${escapeHtml(t.trim())}</span>`).join('') : '')}
+        ${
+          tagsRaw
+            ? tagsRaw
+                .split(',')
+                .map(t => `<span class="tag">${escapeHtml(t.trim())}</span>`)
+                .join('')
+            : ''
+        }
       </div>
       <div class="buttons">
-        ${github ? `<a class="btn" href="${escapeAttr(github)}" target="_blank" rel="noopener">GitHub</a>` : `<span class="btn" style="opacity:.5;cursor:default">GitHub</span>`}
-        ${demo ? `<a class="btn demo" href="${escapeAttr(demo)}" target="_blank" rel="noopener">Demo</a>` : `<span class="btn demo" style="opacity:.5;cursor:default">Demo</span>`}
+        ${
+          github
+            ? `<a class="btn" href="${escapeAttr(github)}" target="_blank" rel="noopener">GitHub</a>`
+            : `<span class="btn" style="opacity:.5;cursor:default">GitHub</span>`
+        }
+        ${
+          demo
+            ? `<a class="btn demo" href="${escapeAttr(demo)}" target="_blank" rel="noopener">Demo</a>`
+            : `<span class="btn demo" style="opacity:.5;cursor:default">Demo</span>`
+        }
       </div>
     </div>
   `;
@@ -73,9 +95,20 @@ projectForm.addEventListener('submit', (e) => {
   closeModal();
 });
 
-function escapeHtml(str){
-  return String(str).replace(/[&<>"']/g, s => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[s]);
+function escapeHtml(str) {
+  return String(str).replace(/[&<>"']/g, (s) => ({
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#39;',
+  })[s]);
 }
-function escapeAttr(url){
-  try { return encodeURI(url); } catch { return '#'; }
+
+function escapeAttr(url) {
+  try {
+    return encodeURI(url);
+  } catch {
+    return '#';
+  }
 }
