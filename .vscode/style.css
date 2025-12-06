@@ -218,3 +218,15 @@ body {
   border: none;
   color: #fff;
 }
+
+/* FIX REAL – sem mexer no HTML */
+.modal-content label {
+  display: block;
+  margin-bottom: 6px;
+}
+
+.modal-content input,
+.modal-content textarea {
+  width: 100%;
+  display: block;
+}
